@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Carousel</title>
+    <style>
+      * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  box-shadow: "0px 4px 4px 0px #00000040,inset 0 0 0 1000px rgba(0,0,0,.5)"
+}
+
+main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+
+.item {
+  width: 200px;
+  height: 300px;
+  list-style-type: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  background-position: center;
+  background-size: cover;
+  border-radius: 20px;
+  box-shadow: 0 20px 30px rgba(255,255,255,0.3) inset;
+  transition: transform 0.1s, left 0.75s, top 0.75s, width 0.75s, height 0.75s;
+
+  &:nth-child(1), &:nth-child(2) {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 1;
+  }
+
+  &:nth-child(3) { left: 50%; }
+  &:nth-child(4) { left: calc(50% + 220px); }
+  &:nth-child(5) { left: calc(50% + 440px); }
+  &:nth-child(6) { left: calc(50% + 660px); opacity: 0; }
+}
+
+.content {
+  width: min(30vw,400px);
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translateY(-50%);
+  font: 400 0.85rem helvetica,sans-serif;
+  color: white;
+  background:  rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 10px;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.5);
+  opacity: 0;
+  display: none;
+
+  & .title {
+    font-family: 'arial-black';
+    text-transform: uppercase;
+  }
+
+  & .description {
+    line-height: 1.7;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  & button {
+    width: fit-content;
+    background-color: rgba(0,0,0,0.1);
+    color: white;
+    border: 2px solid white;
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+    cursor: pointer;
+  }
+}
+
+.item:nth-of-type(2) .content {
+  display: block;
+  animation: show 0.75s ease-in-out 0.3s forwards;
+}
+
+@keyframes show {
+  0% {
+    filter: blur(5px);
+    transform: translateY(calc(-50% + 75px));
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.nav {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  user-select: none;
+
+  & .btn {
+    background-color: rgba(255,255,255,0.5);
+    color: rgba(0,0,0,0.7);
+    border: 2px solid rgba(0,0,0,0.6);
+    margin: 0 0.25rem;
+    padding: 0.75rem;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(255,255,255,0.3);
+    }
+  }
+}
+
+@media (width > 650px) and (width < 900px) {
+  .content {
+    & .title        { font-size: 1rem; }
+    & .description  { font-size: 0.7rem; }
+    & button        { font-size: 0.7rem; }
+  }
+  .item {
+    width: 160px;
+    height: 270px;
+
+    &:nth-child(3) { left: 50%; }
+    &:nth-child(4) { left: calc(50% + 170px); }
+    &:nth-child(5) { left: calc(50% + 340px); }
+    &:nth-child(6) { left: calc(50% + 510px); opacity: 0; }
+  }
+}
+
+@media (width < 650px) {
+  .content {
+    & .title        { font-size: 0.9rem; }
+    & .description  { font-size: 0.65rem; }
+    & button        { font-size: 0.7rem; }
+  }
+  .item {
+    width: 130px;
+    height: 220px;
+
+    &:nth-child(3) { left: 50%; }
+    &:nth-child(4) { left: calc(50% + 140px); }
+    &:nth-child(5) { left: calc(50% + 280px); }
+    &:nth-child(6) { left: calc(50% + 420px); opacity: 0; }
+  }
+}
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <ul class='slider'>
+          <li class='item' style="background-image: url('8.jpg')">
+            <div class='content'>
+              <h2 class='title'>My love Tanu ❤️</h2>
+              <p class='description'>"পাগলী টার সাথের প্রথম দেখা সামান্য একটা game থেকে 😅 কবি বলেছিলেন তুমি যাকে চাও সে কথাই থেকে উড়ে বসবে তোমার কাছে তুমি বুজতে o পারবে না সেটা আমার সাথে হলো" - via Rohit</p>
+              <button>Read More</button>
+            </div>
+          </li>
+          <li class='item' style="background-image: url('1.jpg')">
+            <div class='content'>
+              <h2 class='title'>"You are Magical"</h2>
+              <p class='description'>"আমি রাগতাম আর তার রাগ ভাঙ্গানো আমি কোনো দিনও ভুলতে পারবো না প্রিয় তোমার এই ভালোবাসা 🥺💗✨" - via Rohit</p>
+              <button>Read More</button>
+            </div>
+          </li>
+          <li class='item' style="background-image: url('13.jpg')">
+            <div class='content'>
+              <h2 class='title'>"You are Always in my mind"</h2>
+              <p class='description'>"পাগলী টার অনেক রাগ এবার বাড়ি তে জানাজানি হয়ে গেছে আবার ওর বিয়ে ঠিক করলো আমাকে ফোন বলছে ! আমি শুনলাম দিয়ে আবার আমরা পালিয়ে গেলাম 😍" - via Rohit</p>
+              <button>Read More</button>
+            </div>
+          </li>
+          <li class='item' style="background-image: url('11.jpg')">
+            <div class='content'>
+              <h2 class='title'>"You are Cute.."</h2>
+              <p class='description'>তোমার হয়ে আছি আমি’ তোমার হয়ে থাকবো সারা জীবন তোমায় আমি ভালবেসে যাবো পাশে থেকো সারা জীবন দুরে যেয়ো না তোমায় ছারা একটুও আমার’ ভালো লাগে না - via Rohit</p>
+              <button>Read More</button>
+            </div>
+          </li>
+          <li class='item' style="background-image: url('15.jpg')">
+            <div class='content'>
+              <h2 class='title'>"My love Tanu ❤️"</h2>
+              <p class='description'>তোমায় আমি বলতে চাই,তুমি ছাড়া প্রিয় আর কেহ নাই। ভালবাসি শুধু তোমায় আমি,জনম জনম ভালবাসতে চাই। - via Rohit</p>
+              <button>Read More</button>
+            </div>
+          </li>
+          <li class='item' style="background-image: url('17.jpg')">
+            <div class='content'>
+              <h2 class='title'>"My love Tanu ❤️"</h2>
+              <p class='description'>যতো ভালবাসা পেয়েছি তোমার কাছ থেকে। দুষ্টু এই মন চায়, আরো বেশি পেতে।কি জানি, তোমার মধ্যে কি আছে, কেনো যে এ মন চায়, তোমাকে আরো বেশি করে কাছে পেতে। - via Rohit</p>
+              <button>Read More</button>
+            </div>
+          </li>
+          <li class='item' style="background-image: url('18.jpg')">
+            <div class='content'>
+              <h2 class='title'>"My love Tanu ❤️"</h2>
+              <p class='description'> “ দুনিয়ার সবাই নিষ্ঠুরস্বার্থপর না,প্রমান ছিলাতুমি এখন দুনিয়ার সবাই দুঃখি,প্রমান আমি। ”- via Rohit</p>
+              <button>Read More</button>
+            </div>
+          </li>
+        </ul>
+        <nav class='nav'>
+          <span class='btn prev'>Prev</span>
+          <span class='btn next'>Next</span>
+        </nav>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.querySelector('.slider');
+
+            function activate(e) {
+                const items = document.querySelectorAll('.item');
+                if (e.target.matches('.next')) {
+                    slider.append(items[0]); // Move first item to the end
+                } else if (e.target.matches('.prev')) {
+                    slider.prepend(items[items.length - 1]); // Move last item to the start
+                }
+            }
+
+            document.querySelector('.next').addEventListener('click', activate);
+            document.querySelector('.prev').addEventListener('click', activate);
+        });
+    </script>
+</body>
+</html>
